@@ -5,7 +5,6 @@ import (
 	"fmt"
 )
 
-// Define all the flags
 // Configuration stores command line arguments
 type Configuration struct {
 	Help      bool
