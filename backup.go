@@ -73,7 +73,7 @@ func main() {
 	subdomainChannel := make(chan string)
 	go findSubdomains(target, subdomainChannel)
 
-	subdomains := []string{}
+	var subdomains []string
 	for subdomain := range subdomainChannel {
 		subdomains = append(subdomains, subdomain)
 		fmt.Printf("Found subdomain: %s\n", subdomain)

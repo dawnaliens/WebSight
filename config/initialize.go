@@ -16,9 +16,10 @@ func Init() {
 		"author: dawnaliens\n" +
 		"github:https://github.com/dawnaliens/WebSight\n" +
 		"\n" +
-		"Use -h to get help\n" +
 		"\n" +
-		"Use with caution. You are responsible for your actions"
+		"\n" +
+		"Use with caution. You are responsible for your actions" +
+		"\n"
 
 	fmt.Println(asciiInitialize)
 	fmt.Println(sentence)
