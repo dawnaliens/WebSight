@@ -3,6 +3,8 @@ package main
 import (
 	"WebSight/config"
 	"WebSight/internal/flag"
+	"WebSight/pkg/Scan"
+	"fmt"
 )
 
 func main() {
@@ -12,5 +14,9 @@ func main() {
 		flag.DisplayHelp()
 		return
 	}
+
+	fmt.Println("Scanning target:", config)
+
+	Scan.ExecuteScanner(config)
 
 }
