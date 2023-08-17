@@ -15,7 +15,7 @@ func main() {
 		return
 	}
 
-	fmt.Println("Scanning target:", config)
+	fmt.Println("Scanning target:", config.Target)
 
 	Scan.ExecuteScanner(config)
 
