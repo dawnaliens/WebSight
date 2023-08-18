@@ -4,7 +4,6 @@ import (
 	"flag"
 	"fmt"
 	"os"
-	"strings"
 )
 
 // Configuration stores command line arguments
@@ -26,21 +25,19 @@ func ParseFlags() Configuration {
 	flag.IntVar(&config.EndPort, "end", 100, "Ending port for scanning")
 	flag.StringVar(&config.Output, "output", "output.txt", "Output file name")
 
-	flag.Usage = func() {
-		fmt.Fprintf(os.Stderr, "Usage of Subdomain and Port Scanner:\n")
-		flag.VisitAll(func(f *flag.Flag) {
-			// Split by comma and remove data type from the usage string
-			parts := strings.Split(f.Usage, ",")
-			fmt.Fprintf(os.Stderr, "  -%s=%s\n    \t%s\n", f.Name, f.DefValue, parts[0])
-		})
-	}
-
 	flag.Parse()
 
 	return config
 }
 
 func DisplayHelp() {
-	fmt.Println("Usage of Subdomain and Port Scanner:")
-	flag.PrintDefaults()
+	fmt.Println("Usage: go run main.go [options]\n")
+	fmt.Println("Options:")
+
+	const flagWidth = 10
+	const valueWidth = 20
+	flag.VisitAll(func(f *flag.Flag) {
+		// Modify the display format here, avoiding data type
+		fmt.Fprintf(os.Stderr, "  -%-"+fmt.Sprint(flagWidth)+"s %-"+fmt.Sprint(valueWidth)+"s %s\n", f.Name, f.DefValue, f.Usage)
+	})
 }

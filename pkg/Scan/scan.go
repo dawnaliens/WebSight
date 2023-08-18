@@ -2,15 +2,30 @@ package Scan
 
 import (
 	"WebSight/internal/flag"
+	"bufio"
 	"fmt"
 	"net"
 	"net/http"
+	"os"
 	"sync"
 	"time"
 )
 
 // commonSubdomains represents a list of frequently used subdomains
-var commonSubdomains = []string{"www", "mail", "ftp", "webmail"}
+var commonSubdomains []string
+
+func ReadSubdomains(filename string) []string {
+	file, err := os.Open(filename)
+	if err != nil {
+		fmt.Println(err)
+	}
+	defer file.Close()
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		commonSubdomains = append(commonSubdomains, scanner.Text())
+	}
+	return commonSubdomains
+}
 
 func ScanPort(host string, port int, results chan<- int) {
 	address := fmt.Sprintf("%s:%d", host, port)
@@ -22,6 +37,7 @@ func ScanPort(host string, port int, results chan<- int) {
 }
 
 func FindSubdomains(domain string, found chan<- string) {
+	ReadSubdomains("subdomains-top1mil.txt")
 	for _, sub := range commonSubdomains {
 		d := fmt.Sprintf("%s.%s", sub, domain)
 		ips, err := net.LookupIP(d)
