@@ -23,8 +23,6 @@ func ParseFlags() Configuration {
 	flag.StringVar(&config.Target, "target", "example.com", "Target domain to scan")
 	flag.IntVar(&config.StartPort, "start", 80, "Starting port for scanning")
 	flag.IntVar(&config.EndPort, "end", 100, "Ending port for scanning")
-	flag.StringVar(&config.Output, "output", "output.txt", "Output file name")
-
 	flag.Parse()
 
 	return config
